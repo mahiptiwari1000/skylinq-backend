@@ -18,6 +18,11 @@ app.use(morgan("dev"));
 
 app.get("/", (req, res) => res.send("Pegasus backend API running 🚀"));
 
+app.use((req, res, next) => {
+  console.log("➡️", req.method, req.url);
+  next();
+});
+
 app.use("/api/flights", flightRoutes);
 app.use("/api/fleet", fleetRoutes);
 app.use("/api/analytics", analyticsRoutes);
