@@ -159,3 +159,50 @@ export const seedRequests = async (req, res) => {
       .json({ message: "Error seeding requests", error: err.message });
   }
 };
+
+export const createRequest = async (req, res) => {
+  try {
+    const {
+      requestId,
+      priority,
+      tags,
+      status,
+      fromHospital,
+      toHospital,
+      cargo,
+      progress,
+      eta,
+      etaMinutes,
+      temp,
+    } = req.body;
+
+    const created = await Request.create({
+      requestId,
+      priority,
+      tags,
+      status,
+      fromHospital,
+      toHospital,
+      cargo,
+      progress,
+      eta,
+      etaMinutes,
+      temp,
+      updates: [
+        {
+          message: `${requestId} created`,
+          type: "info",
+          createdAt: new Date(),
+        },
+      ],
+    });
+
+    res.json({ message: "Request created", request: created });
+  } catch (err) {
+    console.error("Error creating request:", err);
+    res.status(500).json({
+      message: "Error creating request",
+      error: err.message,
+    });
+  }
+};

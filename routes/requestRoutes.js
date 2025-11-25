@@ -4,6 +4,7 @@ import {
   getActiveRequests,
   getRequestsSummary,
   seedRequests,
+  createRequest,       
 } from "../controllers/requestController.js";
 
 const router = express.Router();
@@ -16,5 +17,8 @@ router.get("/summary", getRequestsSummary);
 
 // Dev-only: seed demo data
 router.post("/seed", seedRequests);
+
+router.post("/create", createRequest);
+
 
 export default router;

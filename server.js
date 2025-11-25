@@ -10,6 +10,7 @@ import emergencyRoutes from "./routes/emergencyRoutes.js";
 import flightLogRoutes from "./routes/flightLogRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 import supportBotRouter from "./routes/supportBot.js";
+import partnerRoutes from "./routes/partnerRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -31,9 +32,9 @@ app.use("/api/fleet", fleetRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/emergency", emergencyRoutes);
 app.use("/api/logs", flightLogRoutes);
-app.use("/api/requests/active", requestRoutes);
+app.use("/api/requests", requestRoutes);
 app.use("/api/supportBot", supportBotRouter);
-
+app.use("/api/partner", partnerRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
